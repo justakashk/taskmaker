@@ -15,10 +15,22 @@ app.get('/',function(req,res){
     });
 })
 
+// creating routes for readmore...
 
+app.get('/file/:filename', function(req,res){
+ 
+    fs.readFile(`./files/${req.params.filename}`, "utf-8", function(err, filedata){
+        res.render('show', {filename: req.params.filename, filedata});
+    })
+
+})
+
+
+
+// Creating Routes For showing files 
 
 app.post('/create', function(req,res){
-   fs.writeFile(`./files/${req.body.title.split(" ").join(" ")}.txt`, req.body.details , function(err) {})
+   fs.writeFile(`./files/${req.body.title.split(" ").join("")}.txt`, req.body.details , function(err) {})
    res.redirect("/");
 })
 
